@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/logistics_system?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ssXXX
+    time-zone: UTC
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.logistics.entity
+
+security:
+  jwt:
+    secret: change-me-secret
+    expiration: 86400000
+  admin:
+    username: admin
+    password: change-me-password
+
+logging:
+  level:
+    root: INFO
