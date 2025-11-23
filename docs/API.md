@@ -6,6 +6,13 @@
 - 响应格式：`{ code: 0, message: "ok", data: { ... } }`；错误使用非 0 code。
 - 分页参数：`page` 从 1 开始，`pageSize` 默认 20。
 
+## 鉴权 Auth
+- `POST /auth/login` 账号密码登录
+  - Body: `{ username, password }`
+  - Response: `{ token, expireIn }`
+- `POST /auth/logout` 退出登录（可将 Token 加入黑名单）。
+- `GET /auth/profile` 返回当前登录用户信息与权限。
+
 ## 店铺 Shops
 - `POST /shops` 创建店铺
   - Body: `{ shopName, platform, storeUrl?, apiKey?, apiSecret?, accessToken?, timezone? }`
@@ -13,6 +20,12 @@
 - `GET /shops/{id}` 查看
 - `PUT /shops/{id}` 更新
 - `DELETE /shops/{id}` 软删除/禁用
+
+## 平台/17TRACK 凭证配置
+- `PUT /shops/{id}/credentials` 更新店铺的 17TRACK 与平台凭证
+  - Body: `{ apiKey?, apiSecret?, accessToken?, webhookSecret?, extra? }`，字段脱敏返回
+- `POST /shops/{id}/credentials/test` 测试凭证有效性
+  - 调用 17TRACK/平台轻量接口验证，返回 `{ success: true/false, message }`
 
 ## 订单 Orders（预留）
 - `GET /orders` 按店铺/时间范围分页查询。
